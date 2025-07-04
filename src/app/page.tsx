@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { Search, Loader2, AlertCircle } from 'lucide-react';
 import { searchNPMPackages } from '@/utils/api';
 import { NPMPackage } from '@/types';
@@ -39,8 +39,9 @@ export default function SearchPage() {
     try {
       const response = await searchNPMPackages(searchTerm);
       setPackages(response.objects.map(obj => obj.package));
-    } catch (err: any) {
-      setError(err.message || 'Failed to search packages. Please try again.');
+    } catch (err: unknown) {
+      const errorMessage = err instanceof Error ? err.message : 'Failed to search packages. Please try again.';
+      setError(errorMessage);
       console.error('Search error:', err);
     } finally {
       setIsLoading(false);
@@ -110,7 +111,7 @@ export default function SearchPage() {
 
         {hasSearched && !isLoading && packages.length === 0 && !error && (
           <div className="text-center py-12">
-            <p className="text-gray-500 text-lg">No packages found for "{searchTerm}"</p>
+            <p className="text-gray-500 text-lg">No packages found for &quot;{searchTerm}&quot;</p>
             <p className="text-gray-400 mt-2">Try searching with different keywords</p>
           </div>
         )}

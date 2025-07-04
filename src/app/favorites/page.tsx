@@ -36,7 +36,7 @@ export default function FavoritesPage() {
             Your Favorite NPM Packages
           </h1>
           <p className="text-lg text-gray-600 max-w-2xl mx-auto">
-            Review and manage the NPM packages you've marked as favorites
+            Review and manage the NPM packages you&apos;ve marked as favorites
           </p>
         </div>
 
